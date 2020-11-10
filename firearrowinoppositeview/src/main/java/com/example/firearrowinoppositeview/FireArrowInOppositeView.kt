@@ -220,4 +220,13 @@ class FireArrowInOppositeView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : FireArrowInOppositeView {
+            val view : FireArrowInOppositeView = FireArrowInOppositeView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
