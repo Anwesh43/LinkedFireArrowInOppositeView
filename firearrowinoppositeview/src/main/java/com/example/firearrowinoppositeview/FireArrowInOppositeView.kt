@@ -52,7 +52,7 @@ fun Canvas.drawFireArrowInOpposite(scale : Float, w : Float, h : Float, paint : 
     translate(w / 2, h / 2)
     for (j in 0..1) {
         save()
-        rotate(90f * sf.divideScale(2, parts))
+        rotate(rot * sf.divideScale(2, parts))
         translate(0f, h * 0.5f * sf.divideScale(3, parts))
         drawArrow(sf.divideScale(0, parts), sf.divideScale(1, parts), size, paint)
         restore()
@@ -71,14 +71,16 @@ fun Canvas.drawFAIONode(i : Int, scale : Float, paint : Paint) {
 
 class FireArrowInOppositeView(ctx : Context) : View(ctx) {
 
-    override fun onDraw(canvas : Canvas) {
+    private val renderer : Renderer = Renderer(this)
 
+    override fun onDraw(canvas : Canvas) {
+        renderer.render(canvas)
     }
 
     override fun onTouchEvent(event : MotionEvent) : Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-
+                renderer.handleTap()
             }
         }
         return true
