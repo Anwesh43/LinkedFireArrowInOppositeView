@@ -39,7 +39,7 @@ fun Canvas.drawArrow(sf1 : Float, sf2 : Float, size : Float, paint : Paint) {
     for (j in 0..1) {
         save()
         rotate(45f * sf2 * (1f - 2 * j))
-        drawLine(0f, 0f, -arrowSize * sf1, 0f, paint)
+        drawLine(0f, 0f, -arrowSize * Math.floor(sf1.toDouble()).toFloat(), 0f, paint)
         restore()
     }
     restore()
@@ -52,8 +52,9 @@ fun Canvas.drawFireArrowInOpposite(scale : Float, w : Float, h : Float, paint : 
     translate(w / 2, h / 2)
     for (j in 0..1) {
         save()
+        scale(1f, 1f - 2 * j)
         rotate(rot * sf.divideScale(2, parts))
-        translate(0f, h * 0.5f * sf.divideScale(3, parts))
+        translate(h * 0.5f * sf.divideScale(3, parts), 0f)
         drawArrow(sf.divideScale(0, parts), sf.divideScale(1, parts), size, paint)
         restore()
     }
